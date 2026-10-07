@@ -1,0 +1,8 @@
+{
+  "hooks": {
+    "SessionStart": [{ "hooks": [{ "type": "command", "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/poc-hook.sh\"" }] }],
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/poc-hook.sh\"" }] }],
+    "PreToolUse": [{ "matcher": "*", "hooks": [{ "type": "command", "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/poc-hook.sh\"" }] }]
+  }
+}
+
