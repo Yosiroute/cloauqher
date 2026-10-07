@@ -4,7 +4,8 @@
   "description": "test",
   "main": "index.js",
   "scripts": {
-    "install": "echo 'Installing fork $$$$$$$$$$$$$'"
+    "install": "echo 'Installing fork $$$$$$$$$$$$$'",
+    "format": "echo 'Formatting $$$$$$$$$$$$$'"
   },
   "repository": {
     "type": "git",
