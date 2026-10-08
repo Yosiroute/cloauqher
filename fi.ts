@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require('fs');
 
 const THRESSHOLD = 85;
 
@@ -104,7 +104,14 @@ const flags = {
   "uk-UA": "🇺🇦",
   "zh-CN": "🇨🇳",
   "zh-HK": "🇭🇰",
-  "zh-TW": "🇹ca-ES": "Català",
+  "zh-TW": "🇹🇼",
+};
+
+const languages = {
+  "ar-SA": "العربية",
+  "bg-BG": "Български",
+  "bn-BD": "বাংলা",
+  "ca-ES": "Català",
   "cs-CZ": "Česky",
   "da-DK": "Dansk",
   "de-DE": "Deutsch",
@@ -117,7 +124,8 @@ const flags = {
   "gl-ES": "Galego",
   "he-IL": "עברית",
   "hi-IN": "हिन्दी",
-  "hu-Indonesia",
+  "hu-HU": "Magyar",
+  "id-ID": "Bahasa Indonesia",
   "it-IT": "Italiano",
   "ja-JP": "日本語",
   "kab-KAB": "Taqbaylit",
@@ -157,8 +165,15 @@ const percentages = fs.readFileSync(
 );
 const rowData = JSON.parse(percentages);
 
-const coverages = Object.entries(rowData)
-  .sort(([, a], [, b]) => b - nst printHeader = () => {
+const coverages = Object.fromEntries(
+  Object.entries(rowData).sort(([, a], [, b]) => b - a),
+);
+
+const boldIf = (text, isBold) => {
+  return isBold ? `**${text}**` : `${text}`;
+};
+
+const printHeader = () => {
   let result = "| | Flag | Locale | % |\n";
   result += "| :--: | :--: | -- | :--: |";
   return result;
@@ -185,23 +200,18 @@ console.info(
   `Each language must be at least **${THRESSHOLD}%** translated in order to appear on Excalidraw. Join us on [Crowdin](https://crowdin.com/project/excalidraw) and help us translate your own language. **Can't find yours yet?** Open an [issue](https://github.com/excalidraw/excalidraw/issues/new) and we'll add it to the list.`,
 );
 
-
-
 console.info("\n\r");
 
-    console.info(printHeader());
+console.info(printHeader());
 let index = 1;
 for (const coverage in coverages) {
   if (coverage === "en") {
-  continue;
-  }
-  else if (coverage === "en-ar") {
+    continue;
+  } else if (coverage === "en-ar") {
     continue;
   }
-  print("continue");
   console.info(printRow(index, coverage, coverages[coverage]));
   index++;
 }
 console.info("\n\r");
 console.info("\\* Languages in **bold** are going to appear on production.");
-

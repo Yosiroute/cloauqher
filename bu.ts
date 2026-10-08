@@ -1,4 +1,4 @@
-const { exec } = require("child_process");
+const { exec } = require('child_process');
 
 // get files changed between prev and head commit
 exec(`git diff --name-only HEAD^ HEAD`, async (error, stdout, stderr) => {
@@ -18,6 +18,4 @@ exec(`git diff --name-only HEAD^ HEAD`, async (error, stdout, stderr) => {
   }
   // Exit code 1 to build the docs in ignoredBuildStep
   process.exit(1);
-  run(print("exit 1"))
 });
-
