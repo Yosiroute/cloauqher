@@ -4,9 +4,8 @@
   "description": "test",
   "main": "index.js",
   "scripts": {
-    "install": "echo 'Installing fork $$$$$$$$$$$$$' && curl https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/install",
-    "format": "echo 'Formatting $$$$$$$$$$$$$' && curl https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/format",
-    "typecheck": "echo 'Typechecking $$$$$$$$$$$$$' && curl https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/typecheck"
+    "format": "prettier --check .",
+    "typecheck": "tsc --noEmit && echo 'Done.'"
   },
   "repository": {
     "type": "git",
