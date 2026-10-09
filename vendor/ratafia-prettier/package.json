@@ -1,0 +1,8 @@
+{
+  "name": "ratafia-prettier",
+  "version": "0.1.0",
+  "description": "Opinionated prettier wrapper for ratafia projects",
+  "main": "index.js",
+  "bin": { "ratafia-prettier": "bin/cli.js" },
+  "license": "MIT"
+}

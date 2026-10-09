@@ -36,9 +36,11 @@ jobs:
         uses: anthropics/claude-code-action@main
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          # --permission-mode auto: a tool call that needs permission and that the allowed tools
-          # do not cover runs only if Claude Code's safety review passes it. The action sets
-          # --permission-mode acceptEdits for @claude mentions, and this one, which comes after it, wins.
+          # --permission-mode auto: the goal is for claude to review PRs validity and compliance with the rules
+          # When claude is called on a PR, we include bun in allowed tools so that it can run bun 
+          # on the repo to test if the pr files work properly. bun run format is to test the code 
+          # is clean. bun typecheck is to test if the code is type-safe. Running bun is necessary
+          # because the files may not be executable.
           claude_args: |
             --allowedTools "Bash(bun install),Bash(bun test:*),Bash(bun run format),Bash(bun typecheck)"
             --model "claude-haiku-4-5-20251001"
