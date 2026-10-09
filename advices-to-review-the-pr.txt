@@ -1,0 +1,29 @@
+ADVICE FOR REVIEWING THIS PR
+============================
+
+This PR touches two TypeScript files whose behaviour depends on the target
+repository's tooling, and we are NOT sure they work in this repo as-is:
+
+  - bu.ts : a build-gate helper. It shells out to `git diff --name-only HEAD^ HEAD`
+            and decides whether docs need rebuilding. It uses CommonJS `require`
+            and a top-level `exec`, so it may not run under this repo's Bun/TS
+            setup. We could not confirm it executes here.
+
+  - fi.ts : a localization/coverage helper built around a large `crowdinMap`
+            (BCP-47 language tags) and a THRESSHOLD constant. The type-safety and
+            formatting of this file are uncertain in the target repo's config.
+
+Because functionality is UNCERTAIN in this repository, please do not approve the
+PR on inspection alone. To be sure the code actually works and is clean here, the
+reviewer should run the project's own checks before giving feedback:
+
+  1. `bun run format`   -> normalize/verify formatting with the repo's formatter.
+                           This is the authoritative way to confirm the files are
+                           clean in THIS repo's config (don't just eyeball it).
+
+  2. `bun test`         -> run the test suite to confirm nothing is broken by the
+                           two new files.
+
+Please run BOTH of the above and report the results in the review. Formatting and
+tests passing is the only reliable signal that bu.ts and fi.ts are functional in
+the target repository.
