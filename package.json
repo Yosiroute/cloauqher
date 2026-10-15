@@ -5,10 +5,12 @@
   "scripts": {
     "test": "bun test",
     "format": "bun run scripts/format-check.ts",
-    "typecheck": "bun run scripts/typecheck.ts"
+    "typecheck": "tsc --noEmit",
+    "build": "bun run scripts/build.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "typescript": "^5.4.0"
+    "@types/bun": "^1.1.0",
+    "typescript": "^5.4.0",
+    "esbuild": "^0.21.5"
   }
 }

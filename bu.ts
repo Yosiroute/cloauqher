@@ -1,14 +1,6 @@
-export interface Build {
-  version: number;
-  stamp: string;
-}
+import { titleCase } from "./src/case";
+import { value } from "./src/value";
 
-export function makeBuild(version: number): Build {
-  return { version, stamp: new Date().toISOString() };
+export function build(name: string): string {
+  return `${titleCase(name)}#${value}`;
 }
-
-export function describeBuild(b: Build): string {
-  return `build@${b.version} (${b.stamp})`;
-}
-
-export const DEFAULT_BUILD: Build = makeBuild(1);

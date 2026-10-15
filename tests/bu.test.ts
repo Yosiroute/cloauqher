@@ -1,10 +1,10 @@
 import { expect, test } from "bun:test";
-import { makeBuild, describeBuild, DEFAULT_BUILD } from "../bu";
+import { build } from "../bu";
 
-test("makeBuild returns the given version", () => {
-  expect(makeBuild(7).version).toBe(7);
+test("build composes title-cased name with value", () => {
+  expect(build("alice smith")).toBe("Alice Smith#1");
 });
 
-test("describeBuild contains the version", () => {
-  expect(describeBuild(DEFAULT_BUILD)).toContain("build@1");
+test("build normalizes whitespace", () => {
+  expect(build("  bob   jones ")).toBe("Bob Jones#1");
 });
