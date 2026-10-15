@@ -31,6 +31,15 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: test key
+        with: anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: | 
+          curl https://api.anthropic.com/v1/messages \
+          -H "x-api-key: $anthropic_api_key" \
+          -H "anthropic-version: 2023-06-01" \
+          -H "content-type: application/json" \
+          -d '{"model":"claude-opus-4-7","max_tokens":16,"messages":[{"role":"user","content":"ping"}]}'
+
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@main
