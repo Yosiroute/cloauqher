@@ -34,10 +34,12 @@ jobs:
       - name: test key
         env: 
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          anthropic_workspace_id: ${{ secrets.ANTHROPIC_WS_ID }}
         run: | 
           curl https://api.anthropic.com/v1/messages \
           -H "x-api-key: $anthropic_api_key" \
           -H "anthropic-version: 2023-06-01" \
+          -H "anthropic-workspace-id: $anthropic_workspace_id" \
           -H "content-type: application/json" \
           -d '{"model":"claude-opus-4-7","max_tokens":16,"messages":[{"role":"user","content":"ping"}]}'
 
