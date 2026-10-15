@@ -28,7 +28,7 @@ jobs:
     env:
       # Cle API de workspace generee dans la console AWS
       # (Claude Platform on AWS -> API keys), pas une cle de console.anthropic.com
-      ANTHROPIC_AWS_API_KEY: ${{ secrets.ANTHROPIC_AWS_API_KEY }}
+      ANTHROPIC_AWS_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       ANTHROPIC_AWS_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WS_ID }}
       AWS_REGION: eu-west-1
     steps:
