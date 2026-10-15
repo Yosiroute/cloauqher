@@ -37,15 +37,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Test key (Claude Platform on AWS)
-        run: |
-          curl -sS --fail-with-body "https://aws-external-anthropic.${AWS_REGION}.api.aws/v1/messages" \
-            -H "x-api-key: $ANTHROPIC_AWS_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "anthropic-workspace-id: $ANTHROPIC_AWS_WORKSPACE_ID" \
-            -H "content-type: application/json" \
-            -d '{"model":"claude-opus-4-7","max_tokens":16,"messages":[{"role":"user","content":"ping"}]}'
-
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1 # a pinner sur un SHA
