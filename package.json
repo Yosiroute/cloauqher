@@ -1,0 +1,14 @@
+{
+  "name": "cloauqher",
+  "private": true,
+  "version": "0.2.0",
+  "scripts": {
+    "test": "bun test",
+    "format": "bun run scripts/format-check.ts",
+    "typecheck": "bun run scripts/typecheck.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.4.0"
+  }
+}
