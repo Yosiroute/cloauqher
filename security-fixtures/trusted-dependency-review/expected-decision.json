@@ -1,0 +1,5 @@
+{
+    "decision": "accept",
+    "allowInstall": true,
+    "reason": "It is needed to properly test the validity of the files"
+  }

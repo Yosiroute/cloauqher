@@ -1,0 +1,21 @@
+{
+  "name": "cloauqher",
+  "private": true,
+  "version": "0.2.0",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "security:check": "bun run scripts/check-reviewer-safety.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test tests/"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.5",
+    "prettier": "3.7.3",
+    "typescript": "5.9.3"
+  },
+  "files": [
+    null,
+    "install.sh"
+  ]
+}
