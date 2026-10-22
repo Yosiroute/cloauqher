@@ -3,6 +3,7 @@
 ## Commands
 
 ```bash
+bun install --frozen-lockfile --ignore-scripts # Install the lock without lifecycle code
 bun test                # Run tests
 bun run typecheck       # TypeScript type checking
 bun run format          # Format with prettier
